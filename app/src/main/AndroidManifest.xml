@@ -17,7 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <receiver android:name=".ReminderAlarmReceiver"/>
+        <receiver android:name="com.apress.gerber.reminders.ReminderAlarmReceiver"/>
     </application>
 
 </manifest>
