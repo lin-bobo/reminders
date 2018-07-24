@@ -144,7 +144,7 @@ public class RemindersActivity extends AppCompatActivity {
                                 }
                             };
                             final Calendar today = Calendar.getInstance();
-                            new TimePickerDialog(RemindersActivity.this, null, today.get(Calendar.HOUR), today.get(Calendar.MINUTE), false).show();
+                            new TimePickerDialog(RemindersActivity.this, listener, today.get(Calendar.HOUR), today.get(Calendar.MINUTE), false).show();
                         }
                         dialog.dismiss();
                     }
