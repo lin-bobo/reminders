@@ -290,11 +290,22 @@ public class RemindersActivity extends AppCompatActivity {
                 fireCustomDialog(null);
 //                Log.d(getLocalClassName(),"create new Reminder");
                 return true;
+            case R.id.action_about:
+                fireAboutDialog();
+                return true;
             case R.id.action_exit:
                 finish();
                 return true;
             default:
                 return false;
         }
+    }
+
+    private void fireAboutDialog(){
+        //about dialog
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialog_about);
+        dialog.show();
     }
 }
