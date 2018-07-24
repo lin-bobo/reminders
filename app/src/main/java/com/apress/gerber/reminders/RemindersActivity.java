@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class RemindersActivity extends AppCompatActivity {
@@ -133,15 +134,17 @@ public class RemindersActivity extends AppCompatActivity {
 //                            Toast.makeText(RemindersActivity.this, "delete " + masterListPosition, Toast.LENGTH_SHORT).show();
                         }
                         else {
-                            final Date today = new Date();
                             TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
                                 @Override
                                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                                    Date alarm = new Date(today.getYear(), today.getMonth(), today.getDate(), hourOfDay, minute);
-                                    scheduleReminder(alarm.getTime(), reminder.getContent());
+                                    final Calendar alarmTime = Calendar.getInstance();
+                                    alarmTime.set(Calendar.HOUR, hourOfDay);
+                                    alarmTime.set(Calendar.MINUTE, minute);
+                                    scheduleReminder(alarmTime.getTimeInMillis(), reminder.getContent());
                                 }
                             };
-                            new TimePickerDialog(RemindersActivity.this, null, today.getHours(), today.getMinutes(), false).show();
+                            final Calendar today = Calendar.getInstance();
+                            new TimePickerDialog(RemindersActivity.this, null, today.get(Calendar.HOUR), today.get(Calendar.MINUTE), false).show();
                         }
                         dialog.dismiss();
                     }
@@ -233,6 +236,7 @@ public class RemindersActivity extends AppCompatActivity {
         final EditText editCustom = dialog.findViewById(R.id.custom_edit_reminder);
         Button commitButton = dialog.findViewById(R.id.custom_button_commit);
         final CheckBox checkBox = dialog.findViewById(R.id.custom_check_box);
+        checkBox.setChecked(true);
         LinearLayout rootLayout = dialog.findViewById(R.id.custom_root_layout);
         final boolean isEditOperation = (reminder != null);
 
